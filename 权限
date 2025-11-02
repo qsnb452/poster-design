@@ -1,0 +1,74 @@
+import os
+import stat
+
+def create_directories():
+    """创建所需的所有目录"""
+    directories = [
+        "/storage/emulated/0/Download/ANTOOL/dat打包",
+        "/storage/emulated/0/Download/ANTOOL/dat解包",
+        "/storage/emulated/0/Download/ANTOOL/paks",
+        "/storage/emulated/0/Download/ANTOOL/uexp打包",
+        "/storage/emulated/0/Download/ANTOOL/uexp解包",
+        "/storage/emulated/0/Download/ANTOOL/自动写配置区",
+        "/storage/emulated/0/Download/ANTOOL/偷配置存放区",
+        "/storage/emulated/0/Download/ANTOOL/",
+        "/storage/emulated/0/Download/ANTOOL/自动改地铁枪皮/dat存放区/",
+        "/storage/emulated/0/Download/ANTOOL/自动改地铁枪皮/配置/",
+    ]
+    
+    for dir_path in directories:
+        try:
+            os.makedirs(dir_path, exist_ok=True)
+            print(f"已创建目录: {dir_path}")
+        except Exception as e:
+            print(f"创建目录 {dir_path} 时出错: {e}")
+
+def set_executable_permissions():
+    """为指定文件设置可执行权限"""
+    files = [
+        "/data/user/0/com.termux/files/home/ANTOOL/dat打包",
+        "/data/user/0/com.termux/files/home/ANTOOL/dat解包",
+        "/data/user/0/com.termux/files/home/ANTOOL/uexp解包",
+        "/data/user/0/com.termux/files/home/ANTOOL/uexp打包",
+        "/data/user/0/com.termux/files/home/ANTOOL/dat美化",
+        "/data/user/0/com.termux/files/home/ANTOOL/权限",
+        "/data/user/0/com.termux/files/home/ANTOOL/免root输出",
+        "/data/user/0/com.termux/files/home/ANTOOL/衣服水印",
+        "/data/user/0/com.termux/files/home/ANTOOL/配置格式转换",
+        "/data/user/0/com.termux/files/home/ANTOOL/配料表偷配置",
+        "/data/user/0/com.termux/files/home/ANTOOL/自动播报",
+        "/data/user/0/com.termux/files/home/ANTOOL/自动写升级枪配置",
+        "/data/user/0/com.termux/files/home/ANTOOL/自动提取dat",
+        "/data/user/0/com.termux/files/home/ANTOOL/称号",
+        "/data/user/0/com.termux/files/home/ANTOOL/抓小包",
+        "/data/user/0/com.termux/files/home/ANTOOL/头像框",
+        "/data/user/0/com.termux/files/home/ANTOOL/大厅动作",
+        "/data/user/0/com.termux/files/home/ANTOOL/地铁金光",
+        "/data/user/0/com.termux/files/home/ANTOOL/商城入场",
+        "/data/user/0/com.termux/files/home/ANTOOL/免root输出美化代码",
+        "/data/user/0/com.termux/files/home/ANTOOL/地铁枪皮",
+        "/data/user/0/com.termux/files/home/ANTOOL/伪实体",
+        "/data/user/0/com.termux/files/home/ANTOOL/uexp美化",
+        "/data/user/0/com.termux/files/home/ANTOOL/AceNow/打包.bms",
+        "/data/user/0/com.termux/files/home/ANTOOL/AceNow/解包.bms",
+        "/data/user/0/com.termux/files/home/ANTOOL/AceNow/quickbms",
+        "/data/user/0/com.termux/files/home/ANTOOL/AceNow/unpack.bms",
+        "/data/user/0/com.termux/files/home/ANTOOL/AceNow/paks",
+        "/data/user/0/com.termux/files/home/ANTOOL/AceNow/urpack",
+    ]
+    
+    for file_path in files:
+        try:
+            # 获取当前权限并添加执行权限
+            current_perms = os.stat(file_path).st_mode
+            os.chmod(file_path, current_perms | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+            print(f"已为 {file_path} 设置可执行权限")
+        except Exception as e:
+            print(f"为 {file_path} 设置权限时出错: {e}")
+
+if __name__ == "__main__":
+    print("开始创建目录结构...")
+    create_directories()
+    print("\n开始设置文件执行权限...")
+    set_executable_permissions()
+    print("\n操作完成！")
